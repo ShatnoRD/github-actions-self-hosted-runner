@@ -26,6 +26,4 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: |
-            shatnord/github-actions-self-hosted-runner:latest
-            shatnord/github-actions-self-hosted-runner:${{ github.event.release.tag_name }}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/github-actions-self-hosted-runner:${{ github.event_name == 'workflow_dispatch' && 'latest' || github.event.release.tag_name }},${{ github.event_name != 'workflow_dispatch' && secrets.DOCKER_HUB_USERNAME + '/github-actions-self-hosted-runner:latest' || '' }}
