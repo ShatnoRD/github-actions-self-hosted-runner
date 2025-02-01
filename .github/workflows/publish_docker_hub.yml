@@ -27,11 +27,11 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/github-actions-self-hosted-runner:${{ github.event.release.tag_name }}
+          tags: ${{ secrets.DOCKER_USERNAME  }}/github-actions-self-hosted-runner:${{ github.event.release.tag_name }}
 
       - name: Build and push (manual)
         if: github.event_name == 'workflow_dispatch'
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/github-actions-self-hosted-runner:latest
+          tags: ${{ secrets.DOCKER_USERNAME  }}/github-actions-self-hosted-runner:latest
