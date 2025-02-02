@@ -2,15 +2,16 @@
 
 This repository provides the source code for a Docker image that sets up a self-hosted runner for GitHub Actions, including all dependencies and a registration script for your GitHub repo or organization.
 
-- **.github/workflows/publish_docker_hub.yml**: GitHub Actions workflow for building and publishing the Docker image to Docker Hub.
-- **Dockerfile**: Defines the Docker image, including dependencies and setup.
-- **LICENSE**: The project's license (Mozilla Public License 2.0).
-- **README.md**: This file.
-- **self-hosted-runner-start.sh**: Script to register and start the self-hosted runner.
-
 ### Releases
 
-Ironically, I build this `github-actions-self-hosted-runner` image on GitHub's `ubuntu-latest` runner. I avoid using self-hosted runners for public repos because it's easier and more secure to use GitHub's provided runners for the publish pipeline. The image is built and pushed to Docker Hub whenever a new release is published or on demand.
+Ironically, I build this `github-actions-self-hosted-runner` image on GitHub's `ubuntu-latest` runner. I avoid using self-hosted runners for public repos because it's easier and more secure to use GitHub's provided runners for the publish pipeline. The image is built and pushed to Docker Hub and GitHub Packages whenever a new release is published or on demand.
+
+Currently, there are two separate build workflows for templating reasons:
+
+- [publish_docker_hub.yml](.github/workflows/publish_docker_hub.yml): Builds and pushes the image to Docker Hub.
+- [publish_github_packages.yml](.github/workflows/publish_github_packages.yml): Builds and pushes the image to GitHub Packages.
+
+Although this setup could be optimized to use less worker time by combining the two separate ones into a single workflow,this approach allows for clearer separation and templating.
 
 ## Usage
 
